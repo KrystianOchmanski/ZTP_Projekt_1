@@ -12,7 +12,7 @@ using ZTP_Projekt_1.Infrastructure;
 namespace ZTP_Projekt_1.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250302211913_Initial")]
+    [Migration("20250302221052_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -35,7 +35,8 @@ namespace ZTP_Projekt_1.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("NVARCHAR(255)")
+                        .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
                     b.HasKey("Id");
 
