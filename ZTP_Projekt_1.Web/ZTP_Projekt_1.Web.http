@@ -1,0 +1,6 @@
+@ZTP_Projekt_1.Web_HostAddress = http://localhost:5282
+
+GET {{ZTP_Projekt_1.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
