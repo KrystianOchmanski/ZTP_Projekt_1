@@ -10,8 +10,6 @@ namespace ZTP_Projekt_1.Application.IServices
 
         Task<BlockedName> AddAsync(string name);
 
-        Task<bool> RemoveAsync(int id);
-
         Task<bool> RemoveAsync(string name);
     }
 }

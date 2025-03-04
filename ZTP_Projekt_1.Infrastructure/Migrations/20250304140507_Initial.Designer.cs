@@ -12,7 +12,7 @@ using ZTP_Projekt_1.Infrastructure;
 namespace ZTP_Projekt_1.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250302221052_Initial")]
+    [Migration("20250304140507_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -110,12 +110,17 @@ namespace ZTP_Projekt_1.Infrastructure.Migrations
             modelBuilder.Entity("ZTP_Projekt_1.Domain.Product", b =>
                 {
                     b.HasOne("ZTP_Projekt_1.Domain.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("ZTP_Projekt_1.Domain.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

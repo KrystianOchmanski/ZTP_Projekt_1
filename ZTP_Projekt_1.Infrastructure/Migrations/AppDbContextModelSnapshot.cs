@@ -107,12 +107,17 @@ namespace ZTP_Projekt_1.Infrastructure.Migrations
             modelBuilder.Entity("ZTP_Projekt_1.Domain.Product", b =>
                 {
                     b.HasOne("ZTP_Projekt_1.Domain.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("ZTP_Projekt_1.Domain.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

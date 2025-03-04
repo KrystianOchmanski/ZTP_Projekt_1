@@ -19,9 +19,14 @@ namespace ZTP_Projekt_1.Domain
         [Column(TypeName = "decimal(18,2)")]
         public decimal MaxPrice { get; set; }
 
-        public bool IsPriceValid(decimal price)
+        public List<Product> Products { get; set; } = new List<Product>();
+
+        public void ValidatePrice(decimal price)
         {
-            return price >= MinPrice && price <= MaxPrice;
+            if (price < MinPrice || price > MaxPrice)
+            {
+                throw new ArgumentOutOfRangeException(nameof(price), $"Price:{price} is invalid. Valid price for category {Name} is between {MinPrice} and {MaxPrice}");
+            }
         }
     }
 }

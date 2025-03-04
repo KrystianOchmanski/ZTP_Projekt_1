@@ -25,9 +25,9 @@ namespace ZTP_Projekt_1.Application.Services
             return blockedName;
         }
 
-        public Task<IEnumerable<BlockedName>> GetBlockedNamesAsync()
+        public async Task<IEnumerable<BlockedName>> GetBlockedNamesAsync()
         {
-            throw new NotImplementedException();
+            return await _blockedNameRepository.GetBlockedNamesAsync();
         }
 
         public async Task<bool> IsNameBlockedAsync(string name)
@@ -35,14 +35,13 @@ namespace ZTP_Projekt_1.Application.Services
             return await _blockedNameRepository.FindByNameAsync(name) != null;
         }
 
-        public Task<bool> RemoveAsync(int id)
+        public async Task<bool> RemoveAsync(string name)
         {
-            throw new NotImplementedException();
-        }
+            var blockedName = await _blockedNameRepository.FindByNameAsync(name);
+            if (blockedName == null)
+                throw new KeyNotFoundException($"Name: {name} was not found");
 
-        public Task<bool> RemoveAsync(string name)
-        {
-            throw new NotImplementedException();
+            return _blockedNameRepository.Remove(blockedName);
         }
     }
 }

@@ -31,5 +31,14 @@ namespace ZTP_Projekt_1.Domain
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)] 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        public void Update(Product product)
+        {
+            Name = product.Name;
+            Description = product.Description;
+            Price = product.Price;
+            StockQuantity = product.StockQuantity;
+            IsAvailable = product.IsAvailable;
+        }
     }
 }

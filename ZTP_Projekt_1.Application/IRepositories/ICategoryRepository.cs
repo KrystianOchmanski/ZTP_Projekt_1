@@ -14,6 +14,6 @@ namespace ZTP_Projekt_1.Application.IRepositories
 
         Category Update(Category category);
 
-        void Remove(Category category);
+        bool Remove(Category category);
     }
 }
