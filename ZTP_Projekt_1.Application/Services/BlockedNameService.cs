@@ -35,11 +35,11 @@ namespace ZTP_Projekt_1.Application.Services
             return await _blockedNameRepository.FindByNameAsync(name) != null;
         }
 
-        public async Task<bool> RemoveAsync(string name)
+        public async Task<bool> RemoveAsync(int id)
         {
-            var blockedName = await _blockedNameRepository.FindByNameAsync(name);
+            var blockedName = await _blockedNameRepository.GetById(id);
             if (blockedName == null)
-                throw new KeyNotFoundException($"Name: {name} was not found");
+                throw new KeyNotFoundException($"Blocked name was not found");
 
             return await _blockedNameRepository.Remove(blockedName);
         }

@@ -40,7 +40,7 @@ namespace ZTP_Projekt_1.Infrastructure.Repositories
             var entry = _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
 
-            if(entry.State == EntityState.Deleted)
+            if(entry.State == EntityState.Detached)
                 return true;
             return false;
         }

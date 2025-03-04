@@ -8,6 +8,8 @@ namespace ZTP_Projekt_1.Application.IRepositories
 
         Task<BlockedName?> FindByNameAsync(string name);
 
+        Task<BlockedName?> GetById(int id);
+
         Task<BlockedName> AddAsync(BlockedName blockedName);
 
         Task<bool> Remove(BlockedName blockedName);

@@ -30,12 +30,17 @@ namespace ZTP_Projekt_1.Infrastructure.Repositories
             return await _context.BlockedNames.ToListAsync();
         }
 
+        public async Task<BlockedName?> GetById(int id)
+        {
+            return await _context.BlockedNames.FirstOrDefaultAsync(b => b.Id ==  id);   
+        }
+
         public async Task<bool> Remove(BlockedName blockedName)
         {
             var entry = _context.BlockedNames.Remove(blockedName);
             await _context.SaveChangesAsync();
 
-            if(entry.State == EntityState.Deleted)
+            if(entry.State == EntityState.Detached)
                 return true;
             return false;
         }
