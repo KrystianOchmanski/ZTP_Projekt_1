@@ -10,8 +10,8 @@ namespace ZTP_Projekt_1.Application.IRepositories
 
         Task<Product> AddAsync(Product product);
 
-        Product Update(Product product);
+        Task<Product> Update(Product product);
 
-        bool Remove(Product product);
+        Task<bool> Remove(Product product);
     }
 }

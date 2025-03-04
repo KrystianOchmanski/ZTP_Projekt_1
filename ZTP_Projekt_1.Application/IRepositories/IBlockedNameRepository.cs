@@ -10,6 +10,6 @@ namespace ZTP_Projekt_1.Application.IRepositories
 
         Task<BlockedName> AddAsync(BlockedName blockedName);
 
-        bool Remove(BlockedName blockedName);
+        Task<bool> Remove(BlockedName blockedName);
     }
 }

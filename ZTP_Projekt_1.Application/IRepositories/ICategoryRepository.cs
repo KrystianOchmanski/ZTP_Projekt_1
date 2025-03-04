@@ -12,8 +12,8 @@ namespace ZTP_Projekt_1.Application.IRepositories
 
         Task<Category> AddAsync(Category category);
 
-        Category Update(Category category);
+        Task<Category> Update(Category category);
 
-        bool Remove(Category category);
+        Task<bool> Remove(Category category);
     }
 }

@@ -42,7 +42,7 @@ namespace ZTP_Projekt_1.Application.Services
             if (category == null)
                 throw new KeyNotFoundException($"Category ID:{id} was not found.");
 
-            return _categoryRepository.Remove(category);
+            return await _categoryRepository.Remove(category);
         }
 
         public async Task<Category> UpdateAsync(Category category)
@@ -50,7 +50,7 @@ namespace ZTP_Projekt_1.Application.Services
             if (await _categoryRepository.GetByNameAsync(category.Name) != null)
                 throw new ArgumentException($"Category: {category.Name} already exist.");
 
-            return _categoryRepository.Update(category);
+            return await _categoryRepository.Update(category);
         }
     }
 }

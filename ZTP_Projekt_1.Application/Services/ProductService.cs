@@ -51,7 +51,7 @@ namespace ZTP_Projekt_1.Application.Services
                 throw new ArgumentException("Product not found.");
             }
 
-            return _productRepository.Remove(product);
+            return await _productRepository.Remove(product);
         }
 
         public async Task<Product> UpdateAsync(Product editProduct)
@@ -66,7 +66,7 @@ namespace ZTP_Projekt_1.Application.Services
 
             product.Update(editProduct);
 
-            return _productRepository.Update(product);
+            return await _productRepository.Update(product);
         }
     }
 }

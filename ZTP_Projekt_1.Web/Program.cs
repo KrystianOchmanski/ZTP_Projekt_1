@@ -1,5 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using ZTP_Projekt_1.Application.IRepositories;
+using ZTP_Projekt_1.Application.IServices;
+using ZTP_Projekt_1.Application.Services;
 using ZTP_Projekt_1.Infrastructure;
+using ZTP_Projekt_1.Infrastructure.Repositories;
+using ZTP_Projekt_1.Web.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +15,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Auto mapper
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+// DB Context
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Dependency Injection
+builder.Services.AddScoped<IBlockedNameRepository, BlockedNameRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IBlockedNameService, BlockedNameService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 

@@ -41,7 +41,7 @@ namespace ZTP_Projekt_1.Application.Services
             if (blockedName == null)
                 throw new KeyNotFoundException($"Name: {name} was not found");
 
-            return _blockedNameRepository.Remove(blockedName);
+            return await _blockedNameRepository.Remove(blockedName);
         }
     }
 }
