@@ -5,11 +5,14 @@ namespace ZTP_Projekt_1.Domain
 {
     public class Product
     {
+        private int _stockQuantity;
+
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string Name { get; set; } = null!;
+		[Required]
+		[StringLength(20, MinimumLength = 3, ErrorMessage = "Product name must have 3-20 characters.")]
+		[RegularExpression(@"^[A-Za-z0-9]+$", ErrorMessage = "Product name can only contain letters and numbers.")]
+		public string Name { get; set; } = null!;
 
         [StringLength(500)]
         public string? Description { get; set; }
@@ -19,7 +22,16 @@ namespace ZTP_Projekt_1.Domain
         public decimal Price { get; set; }
 
         [Required]
-        public int StockQuantity { get; set; }
+		[Range(0, int.MaxValue, ErrorMessage = "Stock quantity can not be nagative.")]
+		public int StockQuantity 
+        {
+            get => _stockQuantity; 
+            set
+            {
+                if (value < 0) throw new ArgumentOutOfRangeException(nameof(StockQuantity), "Stock quantity cannot be negative.");
+                _stockQuantity = value;
+            } 
+        }
 
         [Required]
         public bool IsAvailable { get; set; } = true;

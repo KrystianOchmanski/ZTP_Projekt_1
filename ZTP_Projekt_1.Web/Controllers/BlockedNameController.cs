@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
 using ZTP_Projekt_1.Application.IServices;
 
 namespace ZTP_Projekt_1.Web.Controllers
@@ -24,6 +25,23 @@ namespace ZTP_Projekt_1.Web.Controllers
                 return Ok(blockedNames);
             }
             catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try
+            {
+                var name = await _blockedNameService.GetById(id);
+
+                if (name == null)
+                    return NotFound("BlockedName not found");
+                return Ok(name);
+            }
+            catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }

@@ -18,6 +18,9 @@ namespace ZTP_Projekt_1.Application.Services
             if (await _categoryRepository.GetByNameAsync(category.Name) != null)
                 throw new ArgumentException($"Category: {category.Name} already exist.");
 
+            if (category.MinPrice >= category.MaxPrice)
+                throw new ArgumentException("Min price must be lower than max price");
+
             return await _categoryRepository.AddAsync(category);
         }
 
@@ -47,7 +50,10 @@ namespace ZTP_Projekt_1.Application.Services
 
         public async Task<Category> UpdateAsync(Category category)
         {
-            if (await _categoryRepository.GetByNameAsync(category.Name) != null)
+            var sameNameCategory = await _categoryRepository.GetByNameAsync(category.Name);
+
+			if (sameNameCategory != null)
+                if(sameNameCategory.Id != category.Id)
                 throw new ArgumentException($"Category: {category.Name} already exist.");
 
             return await _categoryRepository.Update(category);

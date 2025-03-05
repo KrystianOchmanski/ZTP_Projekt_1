@@ -12,7 +12,7 @@ using ZTP_Projekt_1.Infrastructure;
 namespace ZTP_Projekt_1.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250304140507_Initial")]
+    [Migration("20250305174915_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -91,8 +91,8 @@ namespace ZTP_Projekt_1.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");

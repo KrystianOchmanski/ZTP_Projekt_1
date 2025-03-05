@@ -30,7 +30,12 @@ namespace ZTP_Projekt_1.Application.Services
             return await _blockedNameRepository.GetBlockedNamesAsync();
         }
 
-        public async Task<bool> IsNameBlockedAsync(string name)
+		public async Task<BlockedName?> GetById(int id)
+		{
+			return await _blockedNameRepository.GetById(id);
+		}
+
+		public async Task<bool> IsNameBlockedAsync(string name)
         {
             return await _blockedNameRepository.FindByNameAsync(name) != null;
         }

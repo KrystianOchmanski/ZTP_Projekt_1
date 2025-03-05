@@ -6,6 +6,8 @@ namespace ZTP_Projekt_1.Application.IRepositories
     {
         Task<Product?> GetByIdAsync(int id, bool includeCategory = true);
 
+        Task<bool> IsNameUsed(string name);
+
         Task<IEnumerable<Product>> GetAllAsync(bool includeCategories = true);
 
         Task<Product> AddAsync(Product product);

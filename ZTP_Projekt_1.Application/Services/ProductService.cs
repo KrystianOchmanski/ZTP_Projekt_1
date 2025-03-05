@@ -20,8 +20,10 @@ namespace ZTP_Projekt_1.Application.Services
         public async Task<Product> AddAsync(Product product)
         {
             if(await _blockedNameRepository.FindByNameAsync(product.Name) != null)
-                throw new ArgumentException($"Name: {product.Name} is blocked.");
-            
+                throw new ArgumentException($"Name {product.Name} is blocked.");
+
+            if (await _productRepository.IsNameUsed(product.Name))
+                throw new ArgumentException($"Product with name {product.Name} already exist.");            
 
             var category = await _categoryRepository.GetByIdAsync(product.CategoryId)
                 ?? throw new ArgumentException("Category was not found");

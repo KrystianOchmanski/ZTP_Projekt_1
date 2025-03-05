@@ -8,6 +8,8 @@ namespace ZTP_Projekt_1.Application.IServices
 
         Task<IEnumerable<BlockedName>> GetBlockedNamesAsync();
 
+        Task<BlockedName?> GetById(int id);
+
         Task<BlockedName> AddAsync(string name);
 
         Task<bool> RemoveAsync(int id);

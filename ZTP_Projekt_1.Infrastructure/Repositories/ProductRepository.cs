@@ -54,5 +54,10 @@ namespace ZTP_Projekt_1.Infrastructure.Repositories
                 query.Include(p => p.Category);
             return query;
         }
-    }
+
+		public async Task<bool> IsNameUsed(string name)
+		{
+			return await _context.Products.AnyAsync(p => p.Name == name);
+		}
+	}
 }
