@@ -12,7 +12,7 @@ using ZTP_Projekt_1.Infrastructure;
 namespace ZTP_Projekt_1.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250305174915_Initial")]
+    [Migration("20250307134514_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -80,7 +80,8 @@ namespace ZTP_Projekt_1.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)

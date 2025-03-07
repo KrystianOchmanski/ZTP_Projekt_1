@@ -19,6 +19,10 @@ namespace ZTP_Projekt_1.Infrastructure
                 .Property(b => b.Name)
                 .HasColumnType("NVARCHAR(255)")
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS"); // Case insensitive
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.CreatedAt)
+                .HasDefaultValueSql("GETUTCDATE()");
         }
 
     }
