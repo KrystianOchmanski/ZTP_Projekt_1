@@ -8,7 +8,7 @@
 		public decimal Price { get; set; }
 		public int StockQuantity { get; set; }
 		public bool IsAvailable { get; set; }
-		public string CategoryName { get; set; } = null!; 
+		public string CategoryName { get; set; } = string.Empty; 
 		public DateTime CreatedAt { get; set; }
 	}
 }

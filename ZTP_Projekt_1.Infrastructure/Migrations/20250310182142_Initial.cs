@@ -40,6 +40,27 @@ namespace ZTP_Projekt_1.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductHistory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    StockQuantity = table.Column<int>(type: "int", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
+                    ChangeType = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductHistory", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -75,6 +96,9 @@ namespace ZTP_Projekt_1.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "BlockedNames");
+
+            migrationBuilder.DropTable(
+                name: "ProductHistory");
 
             migrationBuilder.DropTable(
                 name: "Products");

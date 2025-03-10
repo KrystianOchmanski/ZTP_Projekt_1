@@ -7,6 +7,8 @@ namespace ZTP_Projekt_1.Infrastructure
     {
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<ProductHistory> ProductHistory { get; set; }
+
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<BlockedName> BlockedNames { get; set; }
@@ -22,6 +24,10 @@ namespace ZTP_Projekt_1.Infrastructure
 
             modelBuilder.Entity<Product>()
                 .Property(p => p.CreatedAt)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            modelBuilder.Entity<ProductHistory>()
+                .Property(p => p.ModifiedAt)
                 .HasDefaultValueSql("GETUTCDATE()");
         }
 

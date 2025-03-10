@@ -4,7 +4,7 @@ namespace ZTP_Projekt_1.Application.IServices
 {
     public interface IProductService
     {
-        Task<IEnumerable<Product>> GetProductsAsync();
+        Task<IEnumerable<Product>> GetProductsAsync(bool includeCategories = true);
 
         Task<Product?> GetByIdAsync(int id);
 

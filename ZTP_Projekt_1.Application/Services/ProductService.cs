@@ -40,9 +40,9 @@ namespace ZTP_Projekt_1.Application.Services
             return await _productRepository.GetByIdAsync(id);
         }
 
-        public async Task<IEnumerable<Product>> GetProductsAsync()
+        public async Task<IEnumerable<Product>> GetProductsAsync(bool includeCategories = true)
         {
-            return await _productRepository.GetAllAsync();
+            return await _productRepository.GetAllAsync(includeCategories);
         }
 
         public async Task<bool> RemoveAsync(int id)

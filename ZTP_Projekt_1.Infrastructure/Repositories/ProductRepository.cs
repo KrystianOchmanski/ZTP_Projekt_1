@@ -16,6 +16,11 @@ namespace ZTP_Projekt_1.Infrastructure.Repositories
         public async Task<Product> AddAsync(Product product)
         {
             var entry = await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync(); // Saving to generate entry ID
+
+            var history = new ProductHistory(entry.Entity, "INSERT");
+            await _context.ProductHistory.AddAsync(history);
+
             await _context.SaveChangesAsync();
             return entry.Entity;
         }
@@ -33,6 +38,10 @@ namespace ZTP_Projekt_1.Infrastructure.Repositories
         public async Task<bool> Remove(Product product)
         {
             var entry = _context.Remove(product);
+
+            var history = new ProductHistory(product, "DELETE");
+            await _context.ProductHistory.AddAsync(history);
+
             await _context.SaveChangesAsync();
 
             if (entry.State == EntityState.Detached)
@@ -43,6 +52,10 @@ namespace ZTP_Projekt_1.Infrastructure.Repositories
         public async Task<Product> Update(Product product)
         {
             var entry = _context.Products.Update(product);
+
+            var history = new ProductHistory(product, "UPDATE");
+            await _context.ProductHistory.AddAsync(history);
+
             await _context.SaveChangesAsync();
             return entry.Entity;
         }
@@ -51,7 +64,7 @@ namespace ZTP_Projekt_1.Infrastructure.Repositories
         { 
             var query = _context.Products.AsQueryable();
             if (includeCategories)
-                query.Include(p => p.Category);
+                query = query.Include(p => p.Category);
             return query;
         }
 
