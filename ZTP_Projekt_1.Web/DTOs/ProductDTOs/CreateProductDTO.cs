@@ -1,9 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace ZTP_Projekt_1.Web.DTOs.ProductDTOs
+﻿namespace ZTP_Projekt_1.Web.DTOs.ProductDTOs
 {
-	public class CreateProductDTO
+    public class CreateProductDTO
     {
         public string Name { get; set; } = null!;
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ZTP_Projekt_1.Application.IServices;
 using ZTP_Projekt_1.Domain;
@@ -57,8 +58,8 @@ namespace ZTP_Projekt_1.Web.Controllers
 			{
 				var result = await _productService.AddAsync(_mapper.Map<Product>(productDTO));
 				return Ok(result);
-			}
-            catch (DbUpdateException ex)
+            }
+            catch (SqlException ex)
             {
                 return BadRequest($"Database error: {ex.InnerException?.Message ?? ex.Message}");
             }

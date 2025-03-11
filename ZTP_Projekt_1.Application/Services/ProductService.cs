@@ -1,4 +1,5 @@
-﻿using ZTP_Projekt_1.Application.IRepositories;
+﻿using System.Text.RegularExpressions;
+using ZTP_Projekt_1.Application.IRepositories;
 using ZTP_Projekt_1.Application.IServices;
 using ZTP_Projekt_1.Domain;
 
@@ -19,7 +20,10 @@ namespace ZTP_Projekt_1.Application.Services
 
         public async Task<Product> AddAsync(Product product)
         {
-            if(await _blockedNameRepository.FindByNameAsync(product.Name) != null)
+            if (!Regex.IsMatch(product.Name, @"^[A-Za-z0-9]+$"))
+                throw new ArgumentException("Product name can only contain letters and numbers.");
+
+            if (await _blockedNameRepository.FindByNameAsync(product.Name) != null)
                 throw new ArgumentException($"Name {product.Name} is blocked.");
 
             if (await _productRepository.IsNameUsed(product.Name))
@@ -58,6 +62,9 @@ namespace ZTP_Projekt_1.Application.Services
 
         public async Task<Product> UpdateAsync(Product editProduct)
         {
+            if (!Regex.IsMatch(editProduct.Name, @"^[A-Za-z0-9]+$"))
+                throw new ArgumentException("Product name can only contain letters and numbers.");
+
             var product = await _productRepository.GetByIdAsync(editProduct.Id)
                 ?? throw new ArgumentException("Product not found");
 
